@@ -20,13 +20,13 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 #=================================================
 
 distribution=$(cat /etc/*release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
-name=gitlab-ee
+name=gitlab
 version=12.1.12
 edition=ee
 
 install_rhel(){
       echo "Downloading $name-$version-$edition"
-      wget -O "$name-$version-$edition.rpm" "https://packages.gitlab.com/gitlab/gitlab-ee/packages/el/7/$name-$version-$edition.0.el7.x86_64.rpm/download.rpm" &> /dev/null
+      wget -O "$name-$version-$edition.rpm" "https://packages.gitlab.com/gitlab/$name-$edition/packages/el/7/$name-$edition-$version-$edition.0.el7.x86_64.rpm/download.rpm" &> /dev/null
       echo "Install $name-$version-$edition"
       yum localinstall $name-$version-$edition.rpm -y &> /dev/null
       echo "Clean $name-$version-$edition"
