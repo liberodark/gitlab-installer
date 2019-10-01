@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #
 # About: Install Gitlab automatically
