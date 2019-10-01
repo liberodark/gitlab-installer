@@ -1,3 +1,4 @@
+
 #!/bin/bash
 #
 # About: Install Gitlab automatically
@@ -25,7 +26,7 @@ edition=ee
 
 install_rhel(){
       echo "Downloading $name-$version-$edition"
-      wget -O "$name-$version-$edition.rpm" "https://packages.gitlab.com/gitlab/gitlab-ee/packages/el/7/"${name}-${version}-${edition}.0.el7.x86_64.rpm/download.rpm" &> /dev/null
+      wget -O "$name-$version-$edition.rpm" "https://packages.gitlab.com/gitlab/gitlab-ee/packages/el/7/$name-$version-$edition.0.el7.x86_64.rpm/download.rpm" &> /dev/null
       echo "Install $name-$version-$edition"
       yum localinstall $name-$version-$edition.rpm -y &> /dev/null
       echo "Clean $name-$version-$edition"
@@ -47,7 +48,7 @@ if [[ "$distribution" = CentOS || "$distribution" = CentOS || "$distribution" = 
       apt-get update &> /dev/null
       apt-get install -y make autoconf automake gcc libc6 libmcrypt-dev libssl-dev openssl packagekit --force-yes &> /dev/null
     
-      #compile_nrpe_ssl || exit
+      compile_nrpe_ssl || exit
       
     elif [[ "$distribution" = Clear ]]; then
       swupd bundle-add make c-basic-legacy openssl devpkg-openssl ansible packagekit &> /dev/null
