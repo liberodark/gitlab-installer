@@ -45,20 +45,20 @@ if [[ "$distribution" = CentOS || "$distribution" = CentOS || "$distribution" = 
       install_rhel || exit
     
     elif [[ "$distribution" = Debian || "$distribution" = Ubuntu || "$distribution" = Deepin ]]; then
-      #apt-get update &> /dev/null
-      #apt-get install -y make autoconf automake gcc libc6 libmcrypt-dev libssl-dev openssl packagekit --force-yes &> /dev/null
+      apt-get update &> /dev/null
+      apt-get install -y make autoconf automake gcc libc6 libmcrypt-dev libssl-dev openssl packagekit --force-yes &> /dev/null
     
       #compile_nrpe_ssl || exit
       
     elif [[ "$distribution" = Clear ]]; then
-      s#wupd bundle-add make c-basic-legacy openssl devpkg-openssl ansible packagekit &> /dev/null
+      swupd bundle-add make c-basic-legacy openssl devpkg-openssl ansible packagekit &> /dev/null
     
-      #compile_nrpe_ssl || exit
+      compile_nrpe_ssl || exit
       
     elif [[ "$distribution" = Manjaro || "$distribution" = Arch\ Linux ]]; then
-      #pacman -S make autoconf automake gcc glibc libmcrypt  openssl packagekit --noconfirm &> /dev/null
+      pacman -S make autoconf automake gcc glibc libmcrypt  openssl packagekit --noconfirm &> /dev/null
     
-      #compile_nrpe_ssl || exit
+      compile_nrpe_ssl || exit
 
     fi
 }
