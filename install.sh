@@ -4,7 +4,7 @@
 # Author: liberodark
 # License: GNU GPLv3
 
-version="0.0.2"
+version="0.0.3"
 
 echo "Welcome on Gitlab Install Script $version"
 
@@ -31,9 +31,9 @@ install_rhel(){
       echo "Downloading $name-$version-$edition"
       wget -O "$name-$version-$edition.rpm" "https://packages.gitlab.com/gitlab/$name-$edition/packages/el/7/$name-$edition-$version-$edition.0.el7.x86_64.rpm/download.rpm" &> /dev/null
       echo "Install $name-$version-$edition"
-      yum localinstall $name-$version-$edition.rpm -y &> /dev/null
+      yum localinstall "$name-$version-$edition.rpm" -y &> /dev/null
       echo "Clean $name-$version-$edition"
-      rm -f $name-$version-$edition.rpm*
+      rm -f "$name-$version-$edition.rpm"
       }
 
 
@@ -43,27 +43,9 @@ echo "Install Gitlab EE Server ($distribution)"
   # Check OS
 
 if [[ "$distribution" = CentOS || "$distribution" = CentOS || "$distribution" = Red\ Hat || "$distribution" = Fedora || "$distribution" = Suse || "$distribution" = Oracle ]]; then
-      #yum install -y make gcc glibc glibc-common openssl openssl-devel PackageKit &> /dev/null
-
       install_rhel || exit
-    
-    elif [[ "$distribution" = Debian || "$distribution" = Ubuntu || "$distribution" = Deepin ]]; then
-      apt-get update &> /dev/null
-      apt-get install -y make autoconf automake gcc libc6 libmcrypt-dev libssl-dev openssl packagekit --force-yes &> /dev/null
-    
-      compile_nrpe_ssl || exit
-      
-    elif [[ "$distribution" = Clear ]]; then
-      swupd bundle-add make c-basic-legacy openssl devpkg-openssl ansible packagekit &> /dev/null
-    
-      compile_nrpe_ssl || exit
-      
-    elif [[ "$distribution" = Manjaro || "$distribution" = Arch\ Linux ]]; then
-      pacman -S make autoconf automake gcc glibc libmcrypt  openssl packagekit --noconfirm &> /dev/null
-    
-      compile_nrpe_ssl || exit
 
-    fi
+fi
 }
 
 check_run
