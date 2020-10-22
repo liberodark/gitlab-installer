@@ -4,7 +4,7 @@
 # Author: liberodark
 # License: GNU GPLv3
 
-version="0.0.1"
+version="0.0.2"
 
 echo "Welcome on Gitlab Install Script $version"
 
@@ -20,8 +20,12 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 
 distribution=$(cat /etc/*release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
 name=gitlab
-version=12.1.12
-edition=ee
+
+echo "What version Download ? Ex : 12.1.12"
+read -r version
+
+echo "What editon Download ? Ex : ee or ce"
+read -r edition
 
 install_rhel(){
       echo "Downloading $name-$version-$edition"
@@ -29,7 +33,7 @@ install_rhel(){
       echo "Install $name-$version-$edition"
       yum localinstall $name-$version-$edition.rpm -y &> /dev/null
       echo "Clean $name-$version-$edition"
-      sudo rm $name-$version-$edition.rpm*
+      rm -f $name-$version-$edition.rpm*
       }
 
 
