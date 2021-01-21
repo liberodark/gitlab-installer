@@ -31,7 +31,7 @@ install_rhel(){
       echo "Downloading $name-$version-$edition"
       wget -O "$name-$version-$edition.rpm" "https://packages.gitlab.com/gitlab/$name-$edition/packages/el/7/$name-$edition-$version-$edition.0.el7.x86_64.rpm/download.rpm" &> /dev/null
       echo "Install $name-$version-$edition"
-      yum localinstall "$name-$version-$edition.rpm" -y &> /dev/null
+      yum localinstall "$name-$version-$edition.rpm" -y > "$name-$version.log"
       echo "Clean $name-$version-$edition"
       rm -f "$name-$version-$edition.rpm"
       }
