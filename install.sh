@@ -4,7 +4,7 @@
 # Author: liberodark
 # License: GNU GPLv3
 
-version="0.0.4"
+version="0.0.5"
 
 echo "Welcome on Gitlab Install Script $version"
 
@@ -37,6 +37,8 @@ install_rhel(){
       # Only if you have issue
       #gitlab-ctl reconfigure
       gitlab-ctl pg-upgrade
+      echo "Complete install $name-$version-$edition"
+      gitlab-ctl restart
       echo "Clean $name-$version-$edition"
       rm -f "$name-$version-$edition.rpm"
       echo "New version is : $check_version"
