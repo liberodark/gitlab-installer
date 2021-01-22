@@ -34,6 +34,8 @@ install_rhel(){
       echo "Install $name-$version-$edition"
       yum localinstall "$name-$version-$edition.rpm" -y > "$name-$version.log"
       echo "Upgrade PostgreSQL $name-$version-$edition"
+      # Only if you have issue
+      #gitlab-ctl reconfigure
       gitlab-ctl pg-upgrade
       echo "Clean $name-$version-$edition"
       rm -f "$name-$version-$edition.rpm"
