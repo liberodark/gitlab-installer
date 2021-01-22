@@ -20,7 +20,6 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 
 distribution=$(cat /etc/*release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
 name=gitlab
-check_version=$(cat /opt/gitlab/version-manifest.txt | head -n 1)
 
 echo "What version Download ? Ex : 13.8.0"
 read -r version
@@ -41,6 +40,7 @@ install_rhel(){
       gitlab-ctl restart
       echo "Clean $name-$version-$edition"
       rm -f "$name-$version-$edition.rpm"
+      check_version=$(cat /opt/gitlab/version-manifest.txt | head -n 1)
       echo "New version is : $check_version"
       }
 
