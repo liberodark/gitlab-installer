@@ -42,6 +42,7 @@ install_rhel(){
       rm -f "$name-$version-$edition.rpm"
       check_version=$(cat /opt/gitlab/version-manifest.txt | head -n 1)
       echo "New version is : $check_version"
+      gitlab-ctl deploy-page down
       }
 
 
