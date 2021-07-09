@@ -4,7 +4,7 @@
 # Author: liberodark
 # License: GNU GPLv3
 
-version="0.0.5"
+version="0.0.6"
 
 echo "Welcome on Gitlab Install Script $version"
 
