@@ -33,8 +33,6 @@ install_rhel(){
       echo "Install $name-$version-$edition"
       yum localinstall "$name-$version-$edition.rpm" -y > "$name-$version-$edition.log"
       echo "Upgrade PostgreSQL $name-$version-$edition"
-      # Only if you have issue
-      #gitlab-ctl reconfigure
       gitlab-ctl pg-upgrade
       echo "Complete install $name-$version-$edition"
       gitlab-ctl restart
@@ -43,6 +41,7 @@ install_rhel(){
       check_version=$(cat /opt/gitlab/version-manifest.txt | head -n 1)
       echo "New version is : $check_version"
       gitlab-ctl deploy-page down
+      gitlab-ctl reconfigure
       }
 
 
