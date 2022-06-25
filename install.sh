@@ -4,7 +4,7 @@
 # Author: liberodark
 # License: GNU GPLv3
 
-version="0.0.6"
+version="0.0.7"
 
 echo "Welcome on Gitlab Install Script $version"
 
@@ -20,6 +20,7 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 
 distribution=$(cat /etc/*release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
 name=gitlab
+v=8
 
 echo "What version Download ? Ex : 13.8.0"
 read -r version
@@ -29,9 +30,9 @@ read -r edition
 
 install_rhel(){
       echo "Downloading $name-$version-$edition"
-      wget -O "$name-$version-$edition.rpm" "https://packages.gitlab.com/gitlab/$name-$edition/packages/el/7/$name-$edition-$version-$edition.0.el7.x86_64.rpm/download.rpm" &> /dev/null
+      wget -O "$name-$version-$edition.rpm" "https://packages.gitlab.com/gitlab/$name-$edition/packages/el/$v/$name-$edition-$version-$edition.0.el$v.x86_64.rpm/download.rpm" &> /dev/null
       echo "Install $name-$version-$edition"
-      yum localinstall "$name-$version-$edition.rpm" -y > "$name-$version-$edition.log"
+      yum localinstall "$name-$version-$edition.rpm" -y
       echo "Upgrade PostgreSQL $name-$version-$edition"
       gitlab-ctl pg-upgrade
       echo "Complete install $name-$version-$edition"
