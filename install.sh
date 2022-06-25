@@ -47,11 +47,11 @@ install_rhel(){
 
 
 check_run(){
-echo "Install Gitlab EE Server ($distribution)"
+echo "Install Gitlab $edition Server ($distribution)"
 
   # Check OS
 
-if [[ "$distribution" = CentOS || "$distribution" = CentOS || "$distribution" = Red\ Hat || "$distribution" = Fedora || "$distribution" = Suse || "$distribution" = Oracle ]]; then
+if [ "$distribution" = "CentOS" ] || [ "$distribution" = "AlmaLinux" ] || [ "$distribution" = "Rocky" ] || [ "$distribution" = "Red\ Hat" ] || [ "$distribution" = "Oracle" ]; then
       install_rhel || exit
 
 fi
