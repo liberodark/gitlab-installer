@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # About: Install Gitlab automatically
 # Author: liberodark
 # License: GNU GPLv3
@@ -13,7 +12,7 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 # Define variables
 distribution=$(cat /etc/*release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
 name="gitlab"
-v=8
+v=$(cat /etc/*release | grep "VERSION_ID" | sed 's/VERSION_ID=//g' | sed 's/["]//g' | cut -f1 -d".")
 
 # Function to display usage information
 usage ()
