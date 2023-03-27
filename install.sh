@@ -13,7 +13,8 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 distribution=$(cat /etc/*release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
 name="gitlab"
 v=$(cat /etc/*release | grep "VERSION_ID" | sed 's/VERSION_ID=//g' | sed 's/["]//g' | cut -f1 -d".")
-backup="/etc/gitlab/config_backup/*.tar"
+backup="/etc/gitlab/config_backup"
+format="*.tar"
 keep="3"
 
 # Function to display usage information
@@ -48,7 +49,7 @@ set_version()
 # Clean Backups
 remove() 
 { 
-    ls "$backup" | head -n -$keep | xargs rm -f;
+    find ${backup}/${format} | head -n -"${keep}" | xargs rm -f;
     echo "Old Backup Cleanup"
 }
 
