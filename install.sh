@@ -72,7 +72,6 @@ install_rhel()
     echo "Deploy the GitLab page and reconfigure"
     gitlab-ctl deploy-page down
     gitlab-ctl reconfigure
-    remove
 }
 
 # Function to check run and install GitLab
@@ -83,6 +82,7 @@ check_run()
     # Check OS
     if [ "$distribution" = "CentOS" ] || [ "$distribution" = "AlmaLinux" ] || [ "$distribution" = "Rocky" ] || [ "$distribution" = "Red\ Hat" ] || [ "$distribution" = "Oracle" ]; then
         install_rhel || exit
+        remove || exit
     else
         echo "Error: Unsupported distribution: $distribution"
         exit 1
