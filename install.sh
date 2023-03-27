@@ -47,8 +47,8 @@ set_version()
 }
 
 # Clean Backups
-remove() 
-{ 
+remove()
+{
     find ${backup}/${format} | head -n -"${keep}" | xargs rm -f;
     echo "Old Backup Cleanup"
 }
