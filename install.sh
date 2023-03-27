@@ -3,7 +3,7 @@
 # Author: liberodark
 # License: GNU GPLv3
 
-version_script="0.0.8"
+version_script="0.0.9"
 echo "Welcome on Gitlab Install Script $version_script"
 
 # Check Root
@@ -13,6 +13,8 @@ if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 distribution=$(cat /etc/*release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
 name="gitlab"
 v=$(cat /etc/*release | grep "VERSION_ID" | sed 's/VERSION_ID=//g' | sed 's/["]//g' | cut -f1 -d".")
+backup="/etc/gitlab/config_backup/*.tar"
+keep="3"
 
 # Function to display usage information
 usage ()
@@ -43,6 +45,13 @@ set_version()
     version="$1"
 }
 
+# Clean Backups
+remove() 
+{ 
+    ls "$backup" | head -n -$keep | xargs rm -f;
+    echo "Old Backup Cleanup"
+}
+
 # Function to install GitLab on Red Hat-based distributions
 install_rhel()
 {
@@ -62,6 +71,7 @@ install_rhel()
     echo "Deploy the GitLab page and reconfigure"
     gitlab-ctl deploy-page down
     gitlab-ctl reconfigure
+    remove
 }
 
 # Function to check run and install GitLab
